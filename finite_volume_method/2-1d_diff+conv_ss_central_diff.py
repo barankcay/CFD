@@ -9,10 +9,7 @@ import matplotlib.pyplot as plt
 # central differencing applied for convection
 
 
-
-
 N =5
-
 S = 1000
 a = 0.5
 L = 5
