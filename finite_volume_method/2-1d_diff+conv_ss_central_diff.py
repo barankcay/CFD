@@ -1,4 +1,3 @@
-
 from sympy import symbols, collect, Matrix
 import numpy as np
 import matplotlib.pyplot as plt
