@@ -1,3 +1,4 @@
+
 from sympy import symbols, collect, Matrix
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,15 +10,15 @@ import matplotlib.pyplot as plt
 
 
 
-N =10
+N =6
 
 S = 1000
 a = 0.5
 L = 5
 k = 100
-T0 = 100
+T0 = 200
 
-exec(f"T{N+1} = 200")
+exec(f"T{N+1} = 20")
 
 Lcell = L / N
 d = Lcell

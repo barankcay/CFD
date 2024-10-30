@@ -1,3 +1,4 @@
+
 from sympy import symbols, collect, Matrix
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,12 +11,12 @@ import matplotlib.pyplot as plt
 #flow direction is from left to right
 
 
-N =5
+N =5 #node number
 
-S = 1000
-a = 0.5
-L = 5
-k = 100
+S = 1000 #source term
+a = 1 #surface area
+L = 5 #length of node
+k = 100 #conductivity 
 T0 = 100
 rho=1
 cp=1000
@@ -44,6 +45,7 @@ for i in range(1, N + 1):
     if i == 1:
         eqn = (k * a * ((Temp[i + 1] - Temp[i]) / d) - k * a * ((Temp[i] - T0) / (d / 2))) + S * V +rho*cp*U*a*T0-rho*cp*U*a*(Temp[i])
         coefficients = collect(eqn, Temp[1:N+1], evaluate=False)
+        print(coefficients)
         constantMatrix.append(coefficients[1])
         # print(constantMatrix)
         for j in range(1, N + 1):
@@ -121,7 +123,7 @@ ax.pcolormesh(newData,Y,Z,cmap="coolwarm",vmin=Z.min(),vmax=Z.max())
 
 plt.xlabel("x [m]")
 plt.ylabel("y [m]")
-plt.colorbar(ax.pcolormesh(newData,Y,Z,cmap="coolwarm",vmin=Z.min(),vmax=Z.max()),ax=ax,ticks=np.linspace(Z.min(),Z.max(),N))
+plt.colorbar(ax.pcolormesh(X,Y,Z,cmap="coolwarm",vmin=Z.min(),vmax=Z.max()),ax=ax,ticks=np.linspace(Z.min(),Z.max(),N))
 ax.set_aspect("equal")
 plt.show()
 

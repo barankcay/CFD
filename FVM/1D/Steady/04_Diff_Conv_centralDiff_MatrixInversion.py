@@ -1,3 +1,4 @@
+
 from sympy import symbols, collect, Matrix
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,7 +10,10 @@ import matplotlib.pyplot as plt
 # central differencing applied for convection
 
 
+
+
 N =5
+
 S = 1000
 a = 0.5
 L = 5
