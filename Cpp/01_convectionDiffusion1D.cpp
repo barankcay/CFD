@@ -18,7 +18,7 @@ int main()
     double cp = 1000;          // specific heat
     double U[1][nFaces] = {0}; // velocity array
 
-    const double velocity = 4; // constant velocity field value. for only diffusion solving, it can be set to 0
+    const double velocity = 0.01; // constant velocity field value. for only diffusion solving, it can be set to 0
 
     double V[1][nCell] = {0};  // m3, volumes of each cell
     double aL[1][nCell] = {0}; // W/K, cell left face coefficient array
