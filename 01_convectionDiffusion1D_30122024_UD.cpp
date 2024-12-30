@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     int dimension = 1;      // dimension of the case
-    int nCell = 5;          // number of cells
+    int nCell = 512;        // number of cells
     int nFaces = nCell + 1; // number of faces
 
     double L = 5;              // m, total length of the rod
