@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const int N = 5;
+const int N = 8;
 
 const double length = 20.0;
 
