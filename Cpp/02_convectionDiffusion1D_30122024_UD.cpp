@@ -16,7 +16,7 @@ int main()
     double Tb = 200;           // C, Right dirichlet BC
     double area = 0.1;         // m2, area perpendicular to rod's axial length
     double source = 1000;      // W/m3, heat source
-    double rho = 1;            // density of the fluid
+    double rho = 11;           // density of the fluid
     double cp = 1000;          // specific heat
     double U[1][nFaces] = {0}; // velocity array
 
