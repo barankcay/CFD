@@ -3,19 +3,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-def read_csv(filename):
-    # CSV dosyasını pandas ile oku, ';' ile ayırarak
-    data = pd.read_csv(filename, header=None, delimiter=';')  # Noktalı virgülle ayır
-    data = data.astype(float)  # Verileri float türüne dönüştür
-    return data.values  # Pandas DataFrame'ini numpy array'e dönüştür
+# def read_csv(filename):
+#     # CSV dosyasını pandas ile oku, ';' ile ayırarak
+#     data = pd.read_csv(filename, header=None, delimiter=';')  # Noktalı virgülle ayır
+#     data = data.astype(float)  # Verileri float türüne dönüştür
+#     return data.values  # Pandas DataFrame'ini numpy array'e dönüştür
 
-max_steps = 10
-x = np.linspace(0, 10, 10)
-y = np.linspace(0, 10, 10)
+max_steps = 200
+
 
 # Set the color range constant
 MIN = 0
-MAX = 10
+MAX = 100
 
 for t in range(max_steps):
     filename = f'dens0_t{t}.csv'
@@ -23,8 +22,10 @@ for t in range(max_steps):
 
     plt.ion()
 
-
-    data = read_csv(filename)
+    data = pd.read_csv(filename, header=None, delimiter=',')  # Noktalı virgülle ayır
+    data = data.astype(float)  # Verileri float türüne dönüştür
+    x = np.linspace(0, data.shape[0], data.shape[0])
+    y = np.linspace(0, data.shape[1], data.shape[1])
 
         
     X, Y = np.meshgrid(x, y)
@@ -35,7 +36,7 @@ for t in range(max_steps):
 
 
     ax.imshow(data, cmap='viridis', vmin=MIN, vmax=MAX)
-    plt.pause(1)
+    # plt.pause(0.5)
 
 
 
