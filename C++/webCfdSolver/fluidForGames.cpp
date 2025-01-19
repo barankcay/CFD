@@ -1,17 +1,21 @@
 #include <iostream>
 #include <vector>
-#include <fstream>
+#include <fstream> // Include for file handling
+#include <iomanip> // Include for fixed precision formatting
 
 using namespace std;
 
-const int N = 8;
+const int N = 30; // The size of the matrix (excluding boundary)
 
-const double length = 20.0;
+const double length = 10;
 
 double h = length / N;
 
-const double dt = 0.100;
-const double diff = 10;
+const double dt = 1;
+const double diff = 0.1;
+
+const double source = 100;
+double a = diff * dt / (h * h);
 
 vector<vector<double>> u(N + 2, vector<double>(N + 2));
 vector<vector<double>> u0(N, vector<double>(N));
@@ -22,8 +26,6 @@ vector<vector<double>> v0(N + 2, vector<double>(N + 2));
 vector<vector<double>> dens(N + 2, vector<double>(N + 2));
 vector<vector<double>> dens0(N + 2, vector<double>(N + 2));
 
-vector<vector<double>> source(N + 2, vector<double>(N + 2));
-
 void SWAP(vector<vector<double>> &dens, vector<vector<double>> &dens0)
 {
     vector<vector<double>> temp(N + 2, vector<double>(N + 2));
@@ -31,50 +33,35 @@ void SWAP(vector<vector<double>> &dens, vector<vector<double>> &dens0)
     dens0 = temp;
 }
 
-void createSource(vector<vector<double>> &source)
+void addSource(vector<vector<double>> &dens)
 {
-    for (int i = 0; i < N + 2; i++)
+    for (int i = 20; i <= 25; i++)
     {
-        for (int j = 0; j < N + 2; j++)
+        for (int j = 20; j <= 25; j++)
         {
-            source[i][j] = 100.0;
+            dens0[i][j] = source * dt;
         }
     }
-}
 
-void addSource(vector<vector<double>> &source, vector<vector<double>> &dens) // vectors dont need pointers. they will change their values permanently
-{
-    for (int i = 1; i <= N; i++)
+    for (int i = 3; i <= 8; i++)
     {
-        for (int j = 1; j <= N; j++)
+        for (int j = 3; j <= 8; j++)
         {
-            dens0[i][j] = dens0[i][j] + source[i][j] * dt;
-        }
-    }
-}
-
-void diffuseBad(vector<vector<double>> &dens, vector<vector<double>> &dens0)
-{
-    double a = diff * dt / (h * h);
-    for (int i = 1; i <= N; i++)
-    {
-        for (int j = 1; j <= N; j++)
-        {
-            dens[i][j] = dens0[i][j] + a * (dens0[i - 1][j] + dens0[i + 1][j] + dens0[i][j - 1] + dens0[i][j + 1] - 4 * dens0[i][j]);
+            dens0[i][j] = source * dt;
         }
     }
 }
 
 void diffuse(vector<vector<double>> &dens, vector<vector<double>> &dens0)
 {
-    double a = diff * dt / (h * h);
+
     for (int k = 0; k < 300; k++)
     {
         for (int i = 1; i <= N; i++)
         {
             for (int j = 1; j <= N; j++)
             {
-                dens[i][j] = (dens0[i][j] + a * (dens[i - 1][j] + dens[i + 1][j] + dens[i][j - 1] + dens[i][j + 1] - 4 * dens[i][j])) / (1 + 4 * a);
+                dens[i][j] = (dens0[i][j] + a * (dens[i - 1][j] + dens[i + 1][j] + dens[i][j - 1] + dens[i][j + 1])) / (1 + 4 * a);
             }
         }
     }
@@ -82,24 +69,29 @@ void diffuse(vector<vector<double>> &dens, vector<vector<double>> &dens0)
 
 int main()
 {
-    createSource(source);
-    addSource(source, dens);
-    for (int t = 0; t < 10; t++)
-    {
 
-        for (int i = 0; i < N + 2; i++)
+    for (int t = 0; t < 200; t = t + dt)
+    {
+        addSource(dens);
+
+        // Print dens0 in the console for each timestep (optional)
+        for (int i = 0; i <= N + 1; i++) // Include boundary cells (0 to N+1)
         {
-            for (int j = 0; j < N + 2; j++)
+            for (int j = 0; j <= N + 1; j++) // Include boundary cells (0 to N+1)
             {
                 cout << dens0[i][j] << " ";
             }
             cout << "\n";
         }
+
         diffuse(dens, dens0);
         SWAP(dens, dens0);
         cout << "\n";
         cout << "\n";
+
+        // Save the current dens0 to a file after each time step
     }
+    cout << a;
 
     return 0;
 }
