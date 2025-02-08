@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const int N = 30; // The size of the matrix (excluding boundary)
+const int N = 10; // The size of the matrix (excluding boundary)
 
 const double length = 10;
 
@@ -35,17 +35,9 @@ void SWAP(vector<vector<double>> &dens, vector<vector<double>> &dens0)
 
 void addSource(vector<vector<double>> &dens)
 {
-    for (int i = 20; i <= 25; i++)
+    for (int i = 3; i <= 6; i++)
     {
-        for (int j = 20; j <= 25; j++)
-        {
-            dens0[i][j] = source * dt;
-        }
-    }
-
-    for (int i = 3; i <= 8; i++)
-    {
-        for (int j = 3; j <= 8; j++)
+        for (int j = 3; j <= 6; j++)
         {
             dens0[i][j] = source * dt;
         }
@@ -70,7 +62,7 @@ void diffuse(vector<vector<double>> &dens, vector<vector<double>> &dens0)
 int main()
 {
 
-    for (int t = 0; t < 200; t = t + dt)
+    for (int t = 0; t < 10; t = t + dt)
     {
         addSource(dens);
 
