@@ -66,10 +66,9 @@ int main()
     {
         addSource(dens);
 
-        // Print dens0 in the console for each timestep (optional)
-        for (int i = 0; i <= N + 1; i++) // Include boundary cells (0 to N+1)
+        for (int i = 0; i <= N + 1; i++)
         {
-            for (int j = 0; j <= N + 1; j++) // Include boundary cells (0 to N+1)
+            for (int j = 0; j <= N + 1; j++)
             {
                 cout << dens0[i][j] << " ";
             }
@@ -80,8 +79,6 @@ int main()
         SWAP(dens, dens0);
         cout << "\n";
         cout << "\n";
-
-        // Save the current dens0 to a file after each time step
     }
     cout << a;
 
