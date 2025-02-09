@@ -26,6 +26,9 @@ vector<vector<double>> v0(N + 2, vector<double>(N + 2));
 vector<vector<double>> dens(N + 2, vector<double>(N + 2));
 vector<vector<double>> dens0(N + 2, vector<double>(N + 2));
 
+vector<vector<double>> xCo(N + 2, vector<double>(N + 2));
+vector<vector<double>> yCo(N + 2, vector<double>(N + 2));
+
 void SWAP(vector<vector<double>> &dens, vector<vector<double>> &dens0)
 {
     vector<vector<double>> temp(N + 2, vector<double>(N + 2));
@@ -33,6 +36,17 @@ void SWAP(vector<vector<double>> &dens, vector<vector<double>> &dens0)
     dens0 = temp;
 }
 
+void createCoordinates(vector<vector<double>> &xCo, vector<vector<double>> &yCo)
+{
+    for (int i = 0; i < N + 1; i++)
+    {
+        for (int j = 0; j < N + 1; j++)
+        {
+            xCo[i][j] = i * h;
+            yCo[i][j] = j * h;
+        }
+    }
+}
 void addSource(vector<vector<double>> &dens)
 {
     for (int i = 3; i <= 6; i++)
@@ -61,6 +75,16 @@ void diffuse(vector<vector<double>> &dens, vector<vector<double>> &dens0)
 
 int main()
 {
+    createCoordinates(xCo, yCo);
+
+    // for (int i = 0; i < N + 1; i++)
+    // {
+    //     for (int j = 0; j < N + 1; j++)
+    //     {
+    //         cout << yCo[i][j] << " ";
+    //     }
+    //     cout << "\n";
+    // }
 
     for (int t = 0; t < 10; t = t + dt)
     {
