@@ -3,6 +3,13 @@
 #include <fstream> // Include for file handling
 #include <iomanip> // Include for fixed precision formatting
 
+//       ------->Y axis
+//       |
+//       |
+//       |
+//       V
+//       x axis
+
 using namespace std;
 
 const int N = 10; // The size of the matrix (excluding boundary)
