@@ -80,6 +80,9 @@ void diffuse(vector<vector<double>> &dens, vector<vector<double>> &dens0)
     }
 }
 
+void advect(vector<vector<double>> &dens, vector<vector<double>> &dens0, vector<vector<double>> &xCo, vector<vector<double>> &yCo)
+{
+}
 int main()
 {
     createCoordinates(xCo, yCo);
