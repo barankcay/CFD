@@ -132,6 +132,38 @@ void advect(vector<vector<double>> &dens, vector<vector<double>> &dens0, vector<
     }
 }
 
+// Function to save dens0 to a file as a matrix in CSV format for Excel
+// Function to save dens0 to a file as a matrix in CSV format for Excel
+void saveToFile(const vector<vector<double>> &dens, const string &filename)
+{
+    ofstream outFile(filename);
+    if (outFile.is_open())
+    {
+        // Set fixed point notation and set precision for writing to the file
+        outFile << fixed << setprecision(6); // Set the precision to 6 decimal places
+
+        // Write the data row by row, each row being a line in the CSV
+        for (int i = 0; i <= N + 1; i++) // Include boundary cells (0 to N+1)
+        {
+            for (int j = 0; j <= N + 1; j++) // Include boundary cells (0 to N+1)
+            {
+                outFile << dens[i][j]; // Write the value
+
+                if (j < N + 1)      // Avoid adding a comma at the end of the row
+                    outFile << ","; // Separate values with a comma
+            }
+            outFile << "\n"; // New line for each row
+        }
+
+        outFile.close();
+        cout << "Data saved to " << filename << endl;
+    }
+    else
+    {
+        cerr << "Unable to open file: " << filename << endl;
+    }
+}
+
 int main()
 {
     createCoordinates(x, y);
@@ -142,6 +174,8 @@ int main()
         addSource(3, 5, 4, 6, dens0, 100);
         addSource(17, 19, 4, 6, dens0, 80);
 
+        saveToFile(dens0, "dens0_t" + to_string(t) + ".csv");
+        // Print dens0 in the console for each timestep (optional)
         for (int i = 0; i <= N + 1; i++) // Include boundary cells (0 to N+1)
         {
             for (int j = 0; j <= N + 1; j++) // Include boundary cells (0 to N+1)
