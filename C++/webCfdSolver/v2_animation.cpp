@@ -168,11 +168,10 @@ int main()
 {
     createCoordinates(x, y);
     velocInitialize(u, v, 0, 0.3);
+    addSource(0, 19, 0, 19, dens0, 100);
 
     for (int t = 0; t < 100; t = t + dt)
     {
-        addSource(3, 5, 4, 6, dens0, 100);
-        addSource(17, 19, 4, 6, dens0, 80);
 
         saveToFile(dens0, "dens0_t" + to_string(t) + ".csv");
         // Print dens0 in the console for each timestep (optional)
